@@ -57,8 +57,7 @@ namespace Patronage2018.WebAPI.Controllers
         /// <response code="200">Successful operation</response>
         /// <response code="503">External service is unavaible</response>
         [Produces("application/json")]
-        [ProducesResponseType(200)]
-        [ProducesResponseType(503)]
+        [ProducesResponseType(typeof(SuccessResponse), 200)]
         [ProducesResponseType(typeof(ErrorResponse), 503)]
         [HttpGet]
         public async Task<ActionResult> Abracadabra()
