@@ -20,7 +20,7 @@ namespace Patronage2018.Application.Abracadabra.Queries
             }
             catch (HttpRequestException)
             {
-                return new GetAbracadabraResult(false, "Service is unavailable.");
+                return new GetAbracadabraResult(false, "External service is unavailable.");
             }
         }
     }

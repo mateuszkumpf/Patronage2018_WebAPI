@@ -26,10 +26,10 @@ namespace Patronage2018.WebAPI.Controllers
         /// Successful operation
         /// </response>
         /// <response code="201">
-        /// Number is not divisible by 2 and 3
+        /// Number is not divisible by 2 or 3.
         /// </response>
         /// <response code="400">
-        /// Incorrect number
+        /// Out of range (0-1000).
         /// </response> 
         [Produces("application/json")]
         [ProducesResponseType(typeof(SuccessResponse), 200)]

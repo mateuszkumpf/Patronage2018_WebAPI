@@ -33,7 +33,7 @@ namespace Patronage2018.Application.FizzBuzz.Queries
             }
             else
             {
-                return new GetFizzBuzzQueryResult(201, "Number is not devide by 2, 3 or both.");
+                return new GetFizzBuzzQueryResult(201, "Number is not divisible by 2 or 3.");
             }
         }
     }
