@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{70526FE0-0
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Patronage2018.Application", "Patronage2018.Application\Patronage2018.Application.csproj", "{AC2C4519-F7C5-4552-A299-600669692A64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{9E5861D9-0919-4894-85A4-9AA3723A18C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTests", "UnitTests\UnitTests.csproj", "{9E5861D9-0919-4894-85A4-9AA3723A18C7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{81C265DD-2F16-46F4-B009-4E811A206462}"
 EndProject

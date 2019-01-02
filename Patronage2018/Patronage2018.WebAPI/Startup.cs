@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Patronage2018.Application.FizzBuzz.Queries;
+using Patronage2018.WebAPI.Middleware;
 using System;
 using System.IO;
 using System.Reflection;
@@ -41,7 +42,8 @@ namespace Patronage2018.WebAPI
                 option.IncludeXmlComments(xmlPath);
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc()
+                    .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             services.Configure<ApiBehaviorOptions>(options =>
             {
@@ -58,11 +60,16 @@ namespace Patronage2018.WebAPI
             }
             else
             {
+                app.UseExceptionHandler("/Error");
+
                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();
+
             app.UseStaticFiles();
+
+            app.UseMiddleware<RequestResponseLoggingMiddleware>();
 
             app.UseMvc(routes =>
             {
