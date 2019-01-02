@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace UnitTests
 {
+    /*
+     * Concept: https://gist.github.com/GeorgDangl/c0a85589616cf3ddffff054ee7cb585d
+     */
     public class MockHttpClient
     {
         public HttpClient GetMockClient()
@@ -28,7 +31,7 @@ namespace UnitTests
                 {
                     Content = new StringContent("Czary mary")
                 };
-                //response.Content = new StringContent(GetAuthJson(), Encoding.UTF8, "application/json");
+
                 return response;
             }
             throw new NotImplementedException();
