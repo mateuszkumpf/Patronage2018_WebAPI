@@ -3,19 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Patronage2018.Domain.Entity
+namespace Patronage2018.Domain.Entities
 {
     public class Room
     {
         public Room()
         {
-            Calenders = new HashSet<Calender>();
+            Calendars = new HashSet<Calendar>();
         }
 
         public int RoomId { get; set; }
 
         public string RoomName { get; set; }
 
-        public ICollection<Calender> Calenders { get; private set; }
+        public ICollection<Calendar> Calendars { get; private set; }
     }
 }

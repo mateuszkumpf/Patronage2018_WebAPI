@@ -1,12 +1,11 @@
-﻿using Patronage2018.Domain.Entity;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
 
 namespace Patronage2018.Domain.Entities
 {
-    public class Calender
+    public class Calendar
     {
+        public int CalendarId { get; set; }
+
         public int RoomId { get; set; }
 
         public DateTime From { get; set; }

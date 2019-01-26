@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Patronage2018.Domain.Entities;
-using Patronage2018.Domain.Entity;
-using System;
 
 namespace Patronage2018.Persistence
 {
@@ -14,6 +12,11 @@ namespace Patronage2018.Persistence
 
         public DbSet<Room> Rooms { get; set; }
 
-        public DbSet<Calender> Calenders { get; set; }
+        public DbSet<Calendar> Calendars { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(PatronageDbContext).Assembly);
+        }
     }
 }
