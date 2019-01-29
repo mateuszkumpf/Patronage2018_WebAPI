@@ -1,10 +1,20 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Patronage2018.Application.FizzBuzz.Queries;
+using Patronage2018.Application.Infrastructure.AutoMapper;
+using Patronage2018.Application.Interfaces;
+using Patronage2018.Application.Notifications;
+using Patronage2018.Application.Notifications.Models;
+using Patronage2018.Application.Rooms.Commands.CreateRoom;
+using Patronage2018.Infrastructure;
+using Patronage2018.Persistence;
 using Patronage2018.WebAPI.Middleware;
 using System;
 using System.IO;
@@ -24,7 +34,16 @@ namespace Patronage2018.WebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<MailSettings>(options => Configuration.GetSection("MailSettings").Bind(options));
+
+            services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).Assembly });
+
             services.AddMediatR(typeof(GetFizzBuzzQueryHandler).GetTypeInfo().Assembly);
+            
+            services.AddTransient<INotificationService, NotificationService>();
+
+            services.AddDbContext<PatronageDbContext>(options =>
+                options.UseSqlServer(Configuration.GetSection("ConnectionStrings").GetValue<string>("PatronageDatabase")));
 
             services.AddSwaggerGen();
             services.ConfigureSwaggerGen(option =>
