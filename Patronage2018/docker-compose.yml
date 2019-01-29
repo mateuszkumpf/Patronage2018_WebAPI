@@ -1,0 +1,22 @@
+version: '3.6'
+
+services:
+  db:
+    image: "mcr.microsoft.com/mssql/server"
+    environment:
+      - SA_PASSWORD=Pass@word
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
+  patronage:
+    build:
+      context: .
+      dockerfile: Patronage2018.WebAPI/Dockerfile
+    depends_on:
+      - "db"
+    ports:
+      - "8000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URL=http://+:80
+      - "ConnectionStrings:PatronageDatabase=Server=db;Database=Patronage2018WebAPI;User ID=sa;Password=Pass@word;"
