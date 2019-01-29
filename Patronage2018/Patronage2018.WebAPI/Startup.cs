@@ -76,11 +76,10 @@ namespace Patronage2018.WebAPI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
             }
             else
             {
-                app.UseExceptionHandler("/Error");
-
                 app.UseHsts();
             }
 
@@ -89,6 +88,8 @@ namespace Patronage2018.WebAPI
             app.UseStaticFiles();
 
             app.UseMiddleware<RequestResponseLoggingMiddleware>();
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             app.UseMvc(routes =>
             {

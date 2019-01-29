@@ -9,6 +9,7 @@ using Patronage2018.Application.Calendars.Commands.UpdateCalendar;
 using Patronage2018.Application.Calendars.Queries.GetAllCalendars;
 using Patronage2018.Application.Calendars.Queries.GetRoomsCalendar;
 using Patronage2018.Application.Calendars.Queries.Models;
+using Patronage2018.WebAPI.Middleware.Models;
 
 namespace Patronage2018.WebAPI.Controllers
 {
@@ -23,8 +24,12 @@ namespace Patronage2018.WebAPI.Controllers
         /// <response code="200">
         /// Successful operation
         /// </response>
+        /// <response code="500">
+        /// Internal error
+        /// </response>
         [Produces("application/json")]
         [ProducesResponseType(typeof(CalendarsListViewModel), 200)]
+        [ProducesResponseType(typeof(ErrorDetails), 500)]
         [HttpGet]
         public async Task<ActionResult<CalendarsListViewModel>> GetAllCalendars()
         {
@@ -43,8 +48,16 @@ namespace Patronage2018.WebAPI.Controllers
         /// <response code="200">
         /// Successful operation
         /// </response>
+        /// <response code="404">
+        /// Not found
+        /// </response>
+        /// <response code="500">
+        /// Internal error
+        /// </response>
         [Produces("application/json")]
         [ProducesResponseType(typeof(CalendarsListViewModel), 200)]
+        [ProducesResponseType(typeof(ErrorDetails), 404)]
+        [ProducesResponseType(typeof(ErrorDetails), 500)]
         [HttpGet("{id}")]
         public async Task<ActionResult<CalendarsListViewModel>> GetRoomsCalendar([FromRoute] int id)
         {
@@ -60,8 +73,12 @@ namespace Patronage2018.WebAPI.Controllers
         /// <response code="200">
         /// Successful operation
         /// </response>
+        /// <response code="500">
+        /// Internal error
+        /// </response>
         [Produces("application/json")]
         [ProducesResponseType(typeof(int), 200)]
+        [ProducesResponseType(typeof(ErrorDetails), 500)]
         [HttpPost]
         public async Task<ActionResult<int>> Create([FromBody]CreateCalendarCommand room)
         {
@@ -79,8 +96,16 @@ namespace Patronage2018.WebAPI.Controllers
         /// <response code="200">
         /// Successful operation
         /// </response>
+        /// /// <response code="404">
+        /// Not found
+        /// </response>
+        /// <response code="500">
+        /// Internal error
+        /// </response>
         [Produces("application/json")]
         [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(ErrorDetails), 404)]
+        [ProducesResponseType(typeof(ErrorDetails), 500)]
         [HttpPut]
         public async Task<ActionResult> Update([FromBody] UpdateCalendarCommand room)
         {
@@ -99,7 +124,15 @@ namespace Patronage2018.WebAPI.Controllers
         /// <response code="204">
         /// Successful operation
         /// </response>
+        /// <response code="404">
+        /// Not found
+        /// </response>
+        /// <response code="500">
+        /// Internal error
+        /// </response>
         [ProducesResponseType(204)]
+        [ProducesResponseType(typeof(ErrorDetails), 404)]
+        [ProducesResponseType(typeof(ErrorDetails), 500)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete([FromRoute] int id)
         {

@@ -5,6 +5,7 @@ using Patronage2018.Application.Rooms.Queries.GetAllRooms;
 using System.Threading.Tasks;
 using Patronage2018.Application.Rooms.Queries.GetRoom;
 using Patronage2018.Application.Rooms.Commands.DeleteRoom;
+using Patronage2018.WebAPI.Middleware.Models;
 
 namespace Patronage2018.WebAPI.Controllers
 {
@@ -20,8 +21,12 @@ namespace Patronage2018.WebAPI.Controllers
         /// <response code="200">
         /// Successful operation
         /// </response>
+        /// <response code="500">
+        /// Internal error
+        /// </response>
         [Produces("application/json")]
         [ProducesResponseType(typeof(RoomsListViewModel), 200)]
+        [ProducesResponseType(typeof(ErrorDetails), 500)]
         [HttpGet]
         public async Task<ActionResult<RoomsListViewModel>> GetAllRooms()
         {
@@ -40,8 +45,16 @@ namespace Patronage2018.WebAPI.Controllers
         /// <response code="200">
         /// Successful operation
         /// </response>
+        /// <response code="404">
+        /// Not found
+        /// </response>
+        /// <response code="500">
+        /// Internal error
+        /// </response>
         [Produces("application/json")]
         [ProducesResponseType(typeof(RoomDetailModel), 200)]
+        [ProducesResponseType(typeof(ErrorDetails), 404)]
+        [ProducesResponseType(typeof(ErrorDetails), 500)]
         [HttpGet("{id}")]
         public async Task<ActionResult<RoomDetailModel>> GetRoom([FromRoute] int id)
         {
@@ -57,8 +70,12 @@ namespace Patronage2018.WebAPI.Controllers
         /// <response code="200">
         /// Successful operation
         /// </response>
+        /// <response code="500">
+        /// Internal error
+        /// </response>
         [Produces("application/json")]
         [ProducesResponseType(typeof(int), 200)]
+        [ProducesResponseType(typeof(ErrorDetails), 500)]
         [HttpPost]
         public async Task<ActionResult<int>> Create([FromBody]CreateRoomCommand room)
         {
@@ -76,8 +93,16 @@ namespace Patronage2018.WebAPI.Controllers
         /// <response code="200">
         /// Successful operation
         /// </response>
+        /// <response code="404">
+        /// Not found
+        /// </response>
+        /// <response code="500">
+        /// Internal error
+        /// </response>
         [Produces("application/json")]
         [ProducesResponseType(200)]
+        [ProducesResponseType(typeof(ErrorDetails), 404)]
+        [ProducesResponseType(typeof(ErrorDetails), 500)]
         [HttpPut]
         public async Task<ActionResult> Update([FromBody] UpdateRoomCommand room)
         {
@@ -96,7 +121,15 @@ namespace Patronage2018.WebAPI.Controllers
         /// <response code="204">
         /// Successful operation
         /// </response>
+        /// <response code="404">
+        /// Not found
+        /// </response>
+        /// <response code="500">
+        /// Internal error
+        /// </response>
         [ProducesResponseType(204)]
+        [ProducesResponseType(typeof(ErrorDetails), 404)]
+        [ProducesResponseType(typeof(ErrorDetails), 500)]
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete([FromRoute] int id)
         {
