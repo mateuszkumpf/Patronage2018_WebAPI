@@ -17,5 +17,10 @@ namespace Patronage2018.Domain.Entities
         public string RoomName { get; set; }
 
         public ICollection<Calendar> Calendars { get; private set; }
+
+        public override string ToString()
+        {
+            return $"RoomId: {RoomId}{Environment.NewLine}RoomName: {RoomName}";
+        }
     }
 }
