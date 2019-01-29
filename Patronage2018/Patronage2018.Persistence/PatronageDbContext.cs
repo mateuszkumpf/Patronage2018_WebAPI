@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Patronage2018.Domain.Entities;
+using Patronage2018.Persistence.Configurations;
 
 namespace Patronage2018.Persistence
 {
@@ -16,7 +17,8 @@ namespace Patronage2018.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(PatronageDbContext).Assembly);
+            modelBuilder.ApplyConfiguration(new CalendarConfiguration());
+            modelBuilder.ApplyConfiguration(new RoomConfiguration());
         }
     }
 }
